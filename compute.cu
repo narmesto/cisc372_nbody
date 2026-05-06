@@ -15,6 +15,10 @@ extern double *mass;
 vector3 *dPos, *dVel, *dAccels;
 double *dMass;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 __global__ void calculate_accelerations(vector3 *pos, double *mass, vector3 *accels) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     int j = blockIdx.y * blockDim.y + threadIdx.y;
@@ -98,3 +102,7 @@ void compute_cuda_finalize() {
     cudaFree(dMass);
     cudaFree(dAccels);
 }
+
+#ifdef __cplusplus
+}
+#endif
