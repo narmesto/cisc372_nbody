@@ -102,9 +102,11 @@ int main(int argc, char **argv)
 	#ifdef DEBUG
 	printSystem(stdout);
 	#endif
+	compute_cuda_init();
 	for (t_now=0;t_now<DURATION;t_now+=INTERVAL){
 		compute();
 	}
+	compute_cuda_finalize();
 	clock_t t1=clock()-t0;
 #ifdef DEBUG
 	printSystem(stdout);
