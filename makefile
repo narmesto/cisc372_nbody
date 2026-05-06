@@ -2,14 +2,16 @@ FLAGS= -DDEBUG
 LIBS= -lm
 ALWAYS_REBUILD=makefile
 
-#Change compiler to nvcc
 CC=nvcc
 
 nbody: nbody.o compute.o
 	$(CC) $(FLAGS) $^ -o $@ $(LIBS)
+
 nbody.o: nbody.c planets.h config.h vector.h $(ALWAYS_REBUILD)
-	gcc $(FLAGS) -c $< 
+	$(CC) $(FLAGS) -c $< 
+
 compute.o: compute.cu config.h vector.h $(ALWAYS_REBUILD)
 	$(CC) $(FLAGS) -c $< 
+
 clean:
-	rm -f *.o nbody 
+	rm -f *.o nbody
